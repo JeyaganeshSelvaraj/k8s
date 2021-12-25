@@ -5,7 +5,7 @@ This is a small application to find pod ip address by service name using go
 
 How to build this application
 
-/**
+/**:
 make clean binaries build-image
  
 kubectl apply -f ./test/
