@@ -1,10 +1,11 @@
 # k8s
 
-# podipfinder
+ # podipfinder
 This is a small application to find pod ip address by service name using go
 
 How to build this application
 
+/**
 make clean binaries build-image
  
 kubectl apply -f ./test/
@@ -23,3 +24,5 @@ kubectl exec podipfinder -- /podipfinder nginx-service
 2021/12/25 20:25:39 IP Addresses for service: nginx-service
 2021/12/25 20:25:39 10.244.2.8
 2021/12/25 20:25:39 10.244.1.1
+
+*/
