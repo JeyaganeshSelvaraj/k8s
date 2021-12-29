@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: configupdater
+  name: configupdater
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configupdater
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: configupdater
+    spec:
+      serviceAccount: developer
+      serviceAccountName: developer
+      containers:
+        - image: jeyaganesh/configupdater:0.0.1
+          imagePullPolicy: Always
+          name: configupdater
+          resources: {}
+status: {}
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: developer
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cm-mgr
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - get
+      - list
+      - update
+      - create
+      - delete
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:  
+  name: cm-mgr-rb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cm-mgr
+subjects:
+- kind: ServiceAccount
+  name: developer
+  namespace: default
+
+---
+apiVersion: v1
+data:
+  dbservice: enterprise
+  dbhost: localhost
+  dbport: "3306"
+kind: ConfigMap
+metadata:  
+  name: test-cm
+

@@ -29,7 +29,7 @@ gofmt:
 	find . -name '*.go' ! -path './vendor/*' -exec gofmt -s -w {} \+
 
 binaries: clean
-	CGO_ENABLED=0 $(GO_BUILD) -o bin/podipfinder
+	CGO_ENABLED=0 $(GO_BUILD) -o bin/configupdater
 
 clean:
 	rm -fr bin/
@@ -38,4 +38,4 @@ test:
 	$(GO) test -v -count=0
 
 build-image:
-	docker build -t jeyaganesh/podipfinder:0.0.1 .
+	docker build -t jeyaganesh/configupdater:0.0.1 .
