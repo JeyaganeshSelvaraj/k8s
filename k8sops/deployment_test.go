@@ -10,7 +10,7 @@ import (
 	k8 "k8s.io/apimachinery/pkg/types"
 )
 
-func TestUpdateFetchDeployment(t *testing.T) {
+func TestPatchDeployment(t *testing.T) {
 	patchData := `
 	{
 		"spec": {
